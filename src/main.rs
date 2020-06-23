@@ -7,8 +7,15 @@ mod layer1;
 mod layer2;
 mod layer3;
 mod layer4;
+mod layer5;
 
-const LAYER_SOLVERS: &[Solver] = &[layer1::solve, layer2::solve, layer3::solve, layer4::solve];
+const LAYER_SOLVERS: &[Solver] = &[
+    layer1::solve,
+    layer2::solve,
+    layer3::solve,
+    layer4::solve,
+    layer5::solve,
+];
 
 fn load_payload(num: usize) -> io::Result<Vec<u8>> {
     fs::read_to_string(format!(
