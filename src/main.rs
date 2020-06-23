@@ -4,7 +4,7 @@ use anyhow::{Context, Result};
 
 type Solver = fn(Vec<u8>) -> Vec<u8>;
 
-const LAYER_SOLVERS: &[Solver] = &[solve_layer1, solve_layer2, solve_layer3];
+const LAYER_SOLVERS: &[Solver] = &[solve_layer1, solve_layer2, solve_layer3, solve_layer4];
 
 fn load_payload(num: usize) -> Result<Vec<u8>> {
     let contents = fs::read_to_string(format!(
@@ -119,6 +119,9 @@ fn solve_layer3(mut payload: Vec<u8>) -> Vec<u8> {
 
     payload
 }
+
+mod layer4;
+use layer4::solve as solve_layer4;
 
 fn main() -> Result<()> {
     let payload = LAYER_SOLVERS.into_iter().enumerate().try_fold(
