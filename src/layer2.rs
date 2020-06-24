@@ -1,13 +1,15 @@
-pub fn solve(mut payload: Vec<u8>) -> Vec<u8> {
-    fn parity(mut byte: u8) -> u8 {
-        let mut result = 0;
-        while byte != 0 {
-            result ^= byte & 1;
-            byte >>= 1;
-        }
-        result
-    }
+fn parity(byte: u8) -> u8 {
+    ((byte >> 0) & 1)
+        ^ ((byte >> 1) & 1)
+        ^ ((byte >> 2) & 1)
+        ^ ((byte >> 3) & 1)
+        ^ ((byte >> 4) & 1)
+        ^ ((byte >> 5) & 1)
+        ^ ((byte >> 6) & 1)
+        ^ ((byte >> 7) & 1)
+}
 
+pub fn solve(mut payload: Vec<u8>) -> Vec<u8> {
     // 1) Retain only bytes with the correct parity bit
     payload.retain(|&byte| parity(byte & !1) == byte & 1);
 
