@@ -1,10 +1,12 @@
 [package]
 name = "data-onion"
-version = "0.1.0"
+version = "1.0.0"
 authors = ["PurpleMyst <PurpleMyst@users.noreply.github.com>"]
 edition = "2018"
+license = "GPL-3.0-only"
+description = "Solution to Tom's Data Onion"
+readme = "README.md"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 ascii85 = "0.2.1"
