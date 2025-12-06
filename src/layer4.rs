@@ -89,7 +89,7 @@ fn should_include(ip_header: IPHeader, udp_header: UDPHeader, datagram: &[u8]) -
         ) == udp_header.expected_checksum
 }
 
-pub(super) fn solve(payload: Vec<u8>) -> Vec<u8> {
+pub fn solve(payload: Vec<u8>) -> Vec<u8> {
     let mut offset = 0;
     let mut new_payload = Vec::with_capacity(payload.len());
     while offset < payload.len() {
