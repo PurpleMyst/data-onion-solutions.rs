@@ -2,11 +2,8 @@ use std::convert::TryInto;
 use std::mem::size_of;
 
 use aes::Aes256;
-use block_modes::block_padding::NoPadding;
-use block_modes::{BlockMode, Cbc, Ecb};
-
-type Aes256Cbc = Cbc<Aes256, NoPadding>;
-type Aes256Ecb = Ecb<aes::Aes256, NoPadding>;
+use cipher::{BlockDecrypt, KeyInit, KeyIvInit, StreamCipher};
+use ctr::Ctr128BE;
 
 fn concat(a: u64, b: u64) -> u128 {
     ((a as u128) << 64) | (b as u128)
@@ -24,10 +21,9 @@ fn unwrap_key(ciphertext: &mut Vec<u64>, kek: &[u8], iv: &[u8]) {
             let mut block = concat(a ^ t, *c).to_be_bytes();
 
             // decrypt this block in place
-            Aes256Ecb::new_var(kek, iv)
-                .expect("could not create AES")
-                .decrypt(&mut block)
-                .expect("could not decrypt block");
+            Aes256::new_from_slice(kek)
+                .unwrap()
+                .decrypt_block((&mut block).into());
 
             // separate it into its constituents
             let b = u128::from_be_bytes(block[..].try_into().unwrap());
@@ -66,6 +62,9 @@ pub fn solve(payload: Vec<u8>) -> Vec<u8> {
     });
 
     // Now us the unwrapped key to decrypt the payload
-    let aes = Aes256Cbc::new_var(&key, payload_iv).unwrap();
-    aes.decrypt_vec(payload).unwrap()
+    let mut payload = payload.to_vec();
+    Ctr128BE::<Aes256>::new_from_slices(&key, payload_iv)
+        .unwrap()
+        .apply_keystream(&mut payload);
+    payload
 }

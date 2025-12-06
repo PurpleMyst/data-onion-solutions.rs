@@ -1,4 +1,4 @@
-const KNOWN_START: &[u8] = &*b"==[ Layer 4/5: ";
+const KNOWN_START: &[u8] = &*b"==[ Layer 4/6: ";
 const KEY_LEN: usize = 32;
 
 pub fn solve(mut payload: Vec<u8>) -> Vec<u8> {
