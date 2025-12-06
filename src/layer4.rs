@@ -30,10 +30,7 @@ fn calculate_checksum<I: IntoIterator<Item = u16>>(it: I) -> u16 {
 }
 
 macro_rules! take {
-    ($ty:ty => $expr:expr) => {{
-        use std::convert::TryInto;
-        <$ty>::from_be_bytes($expr[..::std::mem::size_of::<$ty>()].try_into().unwrap())
-    }};
+    ($ty:ty => $expr:expr) => {{ <$ty>::from_be_bytes($expr[..::std::mem::size_of::<$ty>()].try_into().unwrap()) }};
 }
 
 impl IPHeader {

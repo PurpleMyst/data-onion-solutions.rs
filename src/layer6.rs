@@ -199,17 +199,17 @@ impl CPU {
     ///                           6 => `pc`
     ///
     /// --[ MVI32 {dest} <- imm32 ]---------------------------------
-    /// 
+    ///
     ///   Move immediate 32-bit value
     ///   Opcode: 0b10DDD000 0x__ 0x__ 0x__ 0x__ (5 bytes)
-    /// 
+    ///
     ///   Sets `{dest}` to the value of `imm32`.
-    /// 
+    ///
     ///   `{dest}` is a 3-bit unsigned integer that corresponds to a
     ///   32-bit register. It is the "DDD" bits in the opcode format
     ///   above. Below are the possible valid values (in decimal)
     ///   and their meaning.
-    /// 
+    ///
     ///                           1 => `la`
     ///                           2 => `lb`
     ///                           3 => `lc`
@@ -231,10 +231,10 @@ impl CPU {
     }
 
     /// --[ OUT a ]-------------------------------------------------
-    /// 
+    ///
     ///   Output byte
     ///   Opcode: 0x02 (1 byte)
-    /// 
+    ///
     ///   Appends the value of `a` to the output stream.
     fn out(&mut self) {
         self.output.push(self.registers.a);
@@ -242,10 +242,10 @@ impl CPU {
     }
 
     /// --[ SUB a <- b ]--------------------------------------------
-    /// 
+    ///
     ///   8-bit subtraction
     ///   Opcode: 0xC3 (1 byte)
-    /// 
+    ///
     ///   Sets `a` to the result of subtracting `b` from `a`. If
     ///   subtraction would result in a negative number, 256 is
     ///   added to ensure that the result is non-negative.
@@ -255,10 +255,10 @@ impl CPU {
     }
 
     /// --[ XOR a <- b ]--------------------------------------------
-    /// 
+    ///
     ///   8-bit bitwise exclusive OR
     ///   Opcode: 0xC4 (1 byte)
-    /// 
+    ///
     ///   Sets `a` to the bitwise exclusive OR of `a` and `b`.
     fn xor(&mut self) {
         self.registers.a ^= self.registers.b;
@@ -282,7 +282,8 @@ impl CPU {
     /// Fetch an imm32 value
     fn imm32_offset(&self, offset: usize) -> u32 {
         u32::from_le_bytes(
-            self.memory[self.registers.pc as usize + 1 - offset..self.registers.pc as usize + 5 - offset]
+            self.memory
+                [self.registers.pc as usize + 1 - offset..self.registers.pc as usize + 5 - offset]
                 .try_into()
                 .unwrap(),
         )

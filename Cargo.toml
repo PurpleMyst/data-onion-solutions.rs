@@ -2,7 +2,7 @@
 name = "data-onion"
 version = "2.0.0"
 authors = ["PurpleMyst <PurpleMyst@users.noreply.github.com>"]
-edition = "2018"
+edition = "2024"
 license = "GPL-3.0-only"
 description = "Solution to Tom's Data Onion"
 readme = "README.md"
