@@ -24,7 +24,6 @@ struct CPU {
     registers: Registers,
     memory: Memory,
     output: Output,
-    halted: bool,
 }
 
 impl CPU {
@@ -33,14 +32,13 @@ impl CPU {
             registers: Default::default(),
             memory: program,
             output: Default::default(),
-            halted: false,
         }
     }
 
     fn execute(&mut self) {
-        while !self.halted {
+        loop {
             match self.opcode() {
-                0x01 => self.halt(),
+                0x01 => break,
                 0x02 => self.out(),
                 0x21 => self.jez(),
                 0x22 => self.jnz(),
@@ -93,17 +91,6 @@ impl CPU {
             1
         };
         self.registers.pc += 1;
-    }
-
-    /// --[ HALT ]--------------------------------------------------
-    ///
-    ///   Halt execution
-    ///   Opcode: 0x01 (1 byte)
-    ///
-    ///   Stops the execution of the virtual machine. Indicates that
-    ///   the program has finished successfully.
-    fn halt(&mut self) {
-        self.halted = true;
     }
 
     /// --[ JEZ imm32 ]---------------------------------------------
