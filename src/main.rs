@@ -8,6 +8,7 @@ mod layer2;
 mod layer3;
 mod layer4;
 mod layer5;
+mod layer6;
 
 const LAYER_SOLVERS: &[Solver] = &[
     layer1::solve,
@@ -15,6 +16,7 @@ const LAYER_SOLVERS: &[Solver] = &[
     layer3::solve,
     layer4::solve,
     layer5::solve,
+    layer6::solve,
 ];
 
 fn load_payload(num: usize) -> io::Result<Vec<u8>> {

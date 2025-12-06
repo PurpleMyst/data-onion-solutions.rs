@@ -14,26 +14,10 @@ dependencies = [
 ]
 
 [[package]]
-name = "aes-keywrap"
-version = "0.2.6"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "440d402ed8898fc082b0b3576a9192f3ed2c44cbae43fdd1bb51665ac0ae8042"
-dependencies = [
- "aes",
- "byteorder",
-]
-
-[[package]]
 name = "ascii85"
 version = "0.2.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1f7b2cc50ccfca05cc3e99a014901ae232948108082a2eecebc3ab6544ebd938"
-
-[[package]]
-name = "byteorder"
-version = "1.5.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1fd0f2584146f6f2ef48085050886acf353beff7305ebd1ae69500e27c67f64b"
 
 [[package]]
 name = "cfg-if"
@@ -81,10 +65,9 @@ dependencies = [
 
 [[package]]
 name = "data-onion"
-version = "1.0.0"
+version = "2.0.0"
 dependencies = [
  "aes",
- "aes-keywrap",
  "ascii85",
  "cipher",
  "ctr",
